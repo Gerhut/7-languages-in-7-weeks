@@ -1,3 +1,22 @@
+class Row
+  def self.headers= headers
+    @@headers = headers
+  end
+
+  def initialize data
+    @data = data
+  end
+  
+  def method_missing name, *args
+    index = @@headers.index(name.to_s)
+    if index.nil?
+      nil
+    else
+      @data[index]
+    end
+  end
+end
+
 module ActsAsCsv
 
   def self.included(base)
@@ -16,7 +35,7 @@ module ActsAsCsv
       @csv_contents = []
       filename = self.class.to_s.downcase + '.txt'
       file = File.new(filename)
-      @headers = file.gets.chomp.split(', ')
+      Row.headers = @headers = file.gets.chomp.split(', ')
 
       file.each do |row|
         @csv_contents << row.chomp.split(', ')
@@ -30,19 +49,8 @@ module ActsAsCsv
     end
 
     def each
-      row_obj = Object.new
-      row_obj.instance_variable_set :@headers, @headers
-      def row_obj.method_missing name, *args
-        index = @headers.index(name.to_s)
-        if index.nil?
-          nil
-        else
-          @row[index]
-        end
-      end
       @csv_contents.each do |row|
-        row_obj.instance_variable_set :@row, row
-        yield row_obj
+        yield Row.new(row)
       end
     end
 

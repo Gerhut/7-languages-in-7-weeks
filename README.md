@@ -1,4 +1,7 @@
-SLiSW-Ex
-========
+Seven Languages in Seven Weeks
+==============================
 
-Exercises of Seven Language in Seven Weeks
+A Pragmatic Guide to Learning Programming Languages
+---------------------------------------------------
+
+Exercises

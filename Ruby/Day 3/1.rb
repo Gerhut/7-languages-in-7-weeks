@@ -10,7 +10,9 @@ class Row
   def method_missing name, *args
     index = @@headers.index(name.to_s)
     if index.nil?
-      nil
+      raise(NoMethodError.new(
+        "undefined method '#{name}' for #{inspect}:#{self.class}"
+      ));
     else
       @data[index]
     end

@@ -5,9 +5,9 @@ class Tree
 
     @children = []
     if children.methods.include?('keys') # Hash
-      children.each {|child| @children.push Tree.new(child[0], child[1])}
+      children.each {|key, value| @children.push Tree.new(key, value)}
     elsif children.methods.include?('each_with_index') # Array
-      children.each {|child, index| @children.push Tree.new(index, child)}
+      children.each {|value, index| @children.push Tree.new(index, value)}
     else
       @children = children
     end

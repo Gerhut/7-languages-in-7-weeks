@@ -42,6 +42,8 @@ module ActsAsCsv
       file.each do |row|
         @csv_contents << row.chomp.split(', ')
       end
+
+      file.close
     end
 
     attr_accessor :headers, :csv_contents

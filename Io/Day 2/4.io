@@ -1,6 +1,6 @@
 List myAverage := method(
   s := 0
-  for (i, 0, (self size) - 1, s = s + self at(i))
+  self foreach(i, s = s + i)
   s / (self size)
 )
 

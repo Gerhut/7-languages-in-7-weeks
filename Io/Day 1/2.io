@@ -1,5 +1,5 @@
 Object executeSlot := method(slotName,
-  self getSlot(slotName) call
+  self perform(slotName)
 )
 
 foo := Object clone

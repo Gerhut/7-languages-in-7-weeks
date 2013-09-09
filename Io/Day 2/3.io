@@ -1,10 +1,12 @@
 List sumList := method(
   s := 0;
-  for(i, 0, (self size) - 1,
-    s = s + if(self at(i) getSlot("sumList") != nil,
-      self at(i) sumList,
-      self at(i))
+  self foreach(value,
+    s = s + if(value getSlot("sumList") != nil,
+      value sumList,
+      value
+    )
   )
+  s
 )
 
 list(1, 2, 3) sumList println

@@ -28,7 +28,7 @@ curlyBrackets := method(
   )
 )
 
-Sequence : := method(n,
+Sequence : := method(
   write(" ", self)
 )
 

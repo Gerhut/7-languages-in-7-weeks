@@ -3,16 +3,12 @@ Builder indent := 0
 Builder forward := method(
   write("  " repeated(self indent * 2))
   write("<", call message name)
-
   arguments := call message arguments
   if (arguments first name == "curlyBrackets",
     doMessage(arguments removeFirst)
   )
-
   writeln(">")
-  
   self indent = self indent + 1
-
   arguments foreach(argument,
     content := self doMessage(argument)
     if(content type == "Sequence",
@@ -20,27 +16,24 @@ Builder forward := method(
       writeln(doMessage(argument))
     )
   )
-
   self indent = self indent - 1
-  
   write("  " repeated(self indent * 2))
   writeln("</", call message name, ">")
 )
 
 curlyBrackets := method(
   call message arguments foreach(argument,
-    write(argument code)
-    doMessage(argument)
+    value := doMessage(argument)
+    write("=\"", value, "\"")
   )
 )
 
-OperatorTable addAssignOperator(":", "writeProperty")
-writeProperty := method(key, value,
-  write(" ", key, "=\"", value, "\"")
+Sequence : := method(n,
+  write(" ", self)
 )
 
 (Builder ul(
-  {"size": 3}
+  {"size" : "3"},
   li("a"),
   li("b"),
   "c"

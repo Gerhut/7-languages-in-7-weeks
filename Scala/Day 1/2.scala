@@ -37,16 +37,27 @@ class TicTacToe() {
   def printWinner {
     var winnerChar = '\0'
     var drawGame = true
+    var lineBelongs = ' '
     for (line <- lines) {
       if (winnerChar == '\0') {
         winnerChar = board.charAt(line.start)
+        lineBelongs = ' '
         for (i <- line) {
           if (winnerChar != board.charAt(i)) {
             winnerChar = '\0'
           }
+          if (lineBelongs != '\0' && board.charAt(i) != ' ') {
+            if (lineBelongs == ' ') {
+              lineBelongs = board.charAt(i)
+            } else if (lineBelongs != board.charAt(i)) {
+              lineBelongs = '\0'
+            }
+          }
+        }
+        if (lineBelongs != '\0') {
+          drawGame = false
         }
         if (winnerChar == ' ') {
-          drawGame = false
           winnerChar = '\0'
         }
       }
@@ -86,5 +97,8 @@ ttt.put(3)
 ttt.printBoard
 ttt.printWinner
 ttt.put(5)
+ttt.printBoard
+ttt.printWinner
+ttt.put(8)
 ttt.printBoard
 ttt.printWinner

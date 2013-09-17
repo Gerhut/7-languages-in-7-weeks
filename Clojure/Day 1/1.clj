@@ -1,2 +1,2 @@
 (defn big [st n] (<= (count st) n))
-(big "abc", 2)
+(println (big "abc", 2))
